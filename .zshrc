@@ -1,5 +1,5 @@
 # pnpm
-export PNPM_HOME="/Users/amackera/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -9,14 +9,14 @@ esac
 eval "$(direnv hook zsh)"
 
 # bun completions
-[ -s "/Users/amackera/.bun/_bun" ] && source "/Users/amackera/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export PATH="$PATH:$HOME/go/bin"
-export PATH="$PATH:/Users/amackera/.local/bin"
+# uv, uv tools, and other user-local binaries
 export PATH="$HOME/.local/bin:$PATH"
 
 # asdf version manager

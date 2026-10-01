@@ -10,45 +10,40 @@ Files mirror their location under `$HOME`.
 | `.zshrc`, `.zprofile` | zsh |
 | `.gitconfig`, `.config/git/ignore` | git identity and global ignore |
 | `.tool-versions` | asdf global versions |
+| `Brewfile` | Homebrew packages the configs depend on |
+| `install.sh` | Sets up a Mac from this repo |
 
 Emacs config lives in its own repo: [amackera/emacs.d](https://github.com/amackera/emacs.d).
 
 ## Setting up a new Mac
 
-1. Install Homebrew and the tools the configs expect. `.zprofile` assumes Homebrew at `/opt/homebrew` (Apple Silicon).
+```sh
+git clone https://github.com/amackera/dotfiles.git ~/dotfiles
+~/dotfiles/install.sh
+```
 
-   ```sh
-   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   brew install git gh neovim tmux direnv asdf uv ripgrep fzf tree-sitter-cli
-   brew install --cask ghostty font-fira-code
-   ```
+The first `git` on a fresh Mac prompts to install the Xcode Command Line Tools; let that finish, then clone. The script assumes Apple Silicon (Homebrew at `/opt/homebrew`).
 
-2. Clone this repo and copy the files into `$HOME`.
+`install.sh` runs four steps. Each is safe to re-run, and you can run them individually, e.g. `./install.sh dotfiles`.
 
-   ```sh
-   git clone https://github.com/amackera/dotfiles.git ~/dotfiles
-   rsync -av --exclude .git --exclude README.md ~/dotfiles/ ~/
-   ```
+| Step | What it does |
+| --- | --- |
+| `brew` | Installs Homebrew if missing, trusts the emacs-plus tap, and installs everything in the `Brewfile`. |
+| `dotfiles` | Copies the config files into `$HOME`. An existing file that differs is kept as `<name>.pre-dotfiles`. |
+| `runtimes` | Adds the asdf plugins for `.tool-versions`, installs those versions, and installs Hex and rebar. Erlang and Python compile from source, so this takes a while. |
+| `emacs` | Clones [amackera/emacs.d](https://github.com/amackera/emacs.d) to `~/.emacs.d` if it isn't there. |
 
-3. Install the language runtimes listed in `.tool-versions`.
+Afterwards:
 
-   ```sh
-   asdf plugin add erlang && asdf plugin add elixir && asdf plugin add nodejs && asdf plugin add python
-   cd ~ && asdf install
-   ```
+- Open a new shell, then run `gh auth login` and set up an SSH key for GitHub.
+- Open `nvim`. The first launch bootstraps lazy.nvim, installs the plugins, and Mason pulls the language servers. Run `:Lazy restore` to get the exact plugin versions pinned in `lazy-lock.json`.
+- Open Emacs and let it install its packages.
 
-   The asdf Python is the default `python3` for the shell. Python projects use [uv](https://docs.astral.sh/uv/), which installs whatever version each project pins in `.python-version`.
+### Python
 
-4. Open `nvim`. The first launch bootstraps lazy.nvim, installs the plugins, and Mason pulls the language servers. Run `:Lazy restore` to get the exact plugin versions pinned in `lazy-lock.json`.
-
-5. Clone the Emacs config.
-
-   ```sh
-   git clone https://github.com/amackera/emacs.d.git ~/.emacs.d
-   ```
+asdf provides the default `python3` for the shell. Python projects use [uv](https://docs.astral.sh/uv/), which downloads whatever version each project pins in `.python-version`, so nothing else needs installing up front. Tools installed with `uv tool install` land in `~/.local/bin`, which `.zshrc` puts on `PATH`.
 
 ### Caveats
 
 - The files are copies, not symlinks. After changing a config in `$HOME`, copy it back here to keep the repo current.
-- `.zshrc` has several hardcoded `/Users/amackera/...` paths, so it only works as-is with the same username.
-- `.zshrc` also references pnpm and bun; both fail quietly if missing.
+- `.zshrc` references pnpm and bun, which the script does not install; both fail quietly if missing.
