@@ -19,7 +19,7 @@ Emacs config lives in its own repo: [amackera/emacs.d](https://github.com/amacke
 
    ```sh
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-   brew install git gh neovim tmux direnv asdf ripgrep fzf tree-sitter-cli
+   brew install git gh neovim tmux direnv asdf uv ripgrep fzf tree-sitter-cli
    brew install --cask ghostty font-fira-code
    ```
 
@@ -33,9 +33,11 @@ Emacs config lives in its own repo: [amackera/emacs.d](https://github.com/amacke
 3. Install the language runtimes listed in `.tool-versions`.
 
    ```sh
-   asdf plugin add erlang && asdf plugin add elixir && asdf plugin add nodejs
+   asdf plugin add erlang && asdf plugin add elixir && asdf plugin add nodejs && asdf plugin add python
    cd ~ && asdf install
    ```
+
+   The asdf Python is the default `python3` for the shell. Python projects use [uv](https://docs.astral.sh/uv/), which installs whatever version each project pins in `.python-version`.
 
 4. Open `nvim`. The first launch bootstraps lazy.nvim, installs the plugins, and Mason pulls the language servers. Run `:Lazy restore` to get the exact plugin versions pinned in `lazy-lock.json`.
 
