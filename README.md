@@ -6,7 +6,7 @@ Files mirror their location under `$HOME`.
 | --- | --- |
 | `.config/nvim/` | Neovim (lazy.nvim; Elixir/Phoenix and React setup) |
 | `.tmux.conf` | tmux |
-| `.config/alacritty/` | Alacritty |
+| `.config/ghostty/` | Ghostty |
 | `.zshrc`, `.zprofile` | zsh |
 | `.gitconfig`, `.config/git/ignore` | git identity and global ignore |
 | `.tool-versions` | asdf global versions |
@@ -20,7 +20,7 @@ Emacs config lives in its own repo: [amackera/emacs.d](https://github.com/amacke
    ```sh
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    brew install git gh neovim tmux direnv asdf ripgrep fzf tree-sitter-cli
-   brew install --cask alacritty font-fira-code
+   brew install --cask ghostty font-fira-code
    ```
 
 2. Clone this repo and copy the files into `$HOME`.
