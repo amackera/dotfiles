@@ -1,0 +1,109 @@
+{
+  "LiveView module": {
+    "prefix": "liveview",
+    "body": [
+      "defmodule ${1:MyAppWeb}.${2:Name}Live do",
+      "  use $1, :live_view",
+      "",
+      "  @impl true",
+      "  def mount(_params, _session, socket) do",
+      "    {:ok, ${3:socket}}",
+      "  end",
+      "",
+      "  @impl true",
+      "  def render(assigns) do",
+      "    ~H\"\"\"",
+      "    $0",
+      "    \"\"\"",
+      "  end",
+      "end"
+    ],
+    "description": "Phoenix LiveView module skeleton"
+  },
+  "Function component": {
+    "prefix": "fcomp",
+    "body": [
+      "attr :${1:name}, :${2:string}, ${3:required: true}",
+      "",
+      "def ${4:component}(assigns) do",
+      "  ~H\"\"\"",
+      "  $0",
+      "  \"\"\"",
+      "end"
+    ],
+    "description": "Phoenix function component with attr"
+  },
+  "handle_event": {
+    "prefix": "hevent",
+    "body": [
+      "@impl true",
+      "def handle_event(\"${1:event}\", ${2:_params}, socket) do",
+      "  {:noreply, ${3:socket}}",
+      "end"
+    ],
+    "description": "LiveView handle_event callback"
+  },
+  "handle_info": {
+    "prefix": "hinfo",
+    "body": [
+      "@impl true",
+      "def handle_info(${1:msg}, socket) do",
+      "  {:noreply, ${2:socket}}",
+      "end"
+    ],
+    "description": "LiveView handle_info callback"
+  },
+  "Ecto schema": {
+    "prefix": "schema",
+    "body": [
+      "schema \"${1:table}\" do",
+      "  field :${2:name}, :${3:string}",
+      "",
+      "  timestamps(type: :utc_datetime)",
+      "end",
+      "",
+      "@doc false",
+      "def changeset(${4:struct}, attrs) do",
+      "  $4",
+      "  |> cast(attrs, [:$2])",
+      "  |> validate_required([:$2])",
+      "end"
+    ],
+    "description": "Ecto schema with changeset"
+  },
+  "Ecto migration": {
+    "prefix": "migration",
+    "body": [
+      "def change do",
+      "  create table(:${1:name}) do",
+      "    add :${2:field}, :${3:string}, null: false",
+      "",
+      "    timestamps(type: :utc_datetime)",
+      "  end",
+      "",
+      "  create index(:$1, [:$2])",
+      "end"
+    ],
+    "description": "Ecto migration change block"
+  },
+  "Test case": {
+    "prefix": "test",
+    "body": ["test \"${1:description}\" do", "  $0", "end"],
+    "description": "ExUnit test"
+  },
+  "Describe block": {
+    "prefix": "describe",
+    "body": ["describe \"${1:function/1}\" do", "  $0", "end"],
+    "description": "ExUnit describe block"
+  },
+  "Pipe into case": {
+    "prefix": "case",
+    "body": ["case ${1:expr} do", "  {:ok, ${2:result}} -> $3", "  {:error, reason} -> $0", "end"],
+    "description": "case on ok/error tuple"
+  },
+  "with statement": {
+    "prefix": "with",
+    "body": ["with {:ok, ${1:value}} <- ${2:expr} do", "  $3", "else", "  {:error, reason} -> $0", "end"],
+    "description": "with/else on ok/error tuple"
+  }
+}

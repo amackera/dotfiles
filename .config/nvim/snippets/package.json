@@ -1,0 +1,13 @@
+{
+  "name": "amackera-snippets",
+  "version": "1.0.0",
+  "contributes": {
+    "snippets": [
+      { "language": ["elixir", "eelixir", "heex"], "path": "./elixir.json" },
+      {
+        "language": ["javascriptreact", "typescriptreact"],
+        "path": "./react.json"
+      }
+    ]
+  }
+}

@@ -1,7 +1,13 @@
 [window]
 option_as_alt = "Both"
 
+[font]
+size = 12.0
+
+[font.normal]
+family = "Fira Code"
+
 [[keyboard.bindings]]
 key = "Return"
 mods = "Shift"
-chars = "\u001B\r"
+chars = "\u001b[13;2u"
