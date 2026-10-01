@@ -21,6 +21,3 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # asdf version manager
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# OpenClaw Completion
-source "/Users/amackera/.openclaw/completions/openclaw.zsh"
