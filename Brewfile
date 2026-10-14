@@ -3,6 +3,8 @@ brew "git"
 brew "gh"
 brew "direnv"
 brew "tmux"
+brew "tree"
+brew "herdr"
 
 # Language runtimes: asdf for Elixir/Erlang/Node/Python, uv for Python projects
 brew "asdf"
@@ -32,3 +34,14 @@ brew "libvterm"
 # Terminal and font
 cask "ghostty"
 cask "font-fira-code"
+
+# Apps
+cask "1password"
+cask "google-chrome"
+cask "zen"
+cask "rectangle"
+cask "slack"
+cask "signal"
+cask "mimestream"
+cask "spotify"
+cask "ngrok"
