@@ -19,6 +19,11 @@ map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move selection up" })
 map("v", "<", "<gv", { desc = "Dedent and keep selection" })
 map("v", ">", ">gv", { desc = "Indent and keep selection" })
 
+-- Command line: %% expands to the current file's directory
+map("c", "%%", function()
+  return vim.fn.getcmdtype() == ":" and vim.fn.expand("%:h") .. "/" or "%%"
+end, { expr = true, desc = "Current file's directory" })
+
 -- Diagnostics
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line diagnostics" })
 map("n", "<leader>cq", vim.diagnostic.setloclist, { desc = "Diagnostics to loclist" })

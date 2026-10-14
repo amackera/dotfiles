@@ -27,6 +27,8 @@ return {
         "html",
         "jsonls",
         "yamlls",
+        "basedpyright", -- Python types, navigation, completion
+        "ruff", -- Python lint + format
       }
 
       require("mason-lspconfig").setup({
@@ -130,6 +132,39 @@ return {
             experimental = { completion = { enableServerSideFuzzyMatch = true } },
           },
         },
+      })
+
+      ---------------------------------------------------------------------
+      -- Python
+      ---------------------------------------------------------------------
+      -- Point basedpyright at the project's .venv (uv) so library modules
+      -- resolve even when nvim wasn't started from an activated venv.
+      vim.lsp.config("basedpyright", {
+        before_init = function(_, config)
+          local python = config.root_dir and (config.root_dir .. "/.venv/bin/python")
+          if python and vim.uv.fs_stat(python) then
+            config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
+              python = { pythonPath = python },
+            })
+          end
+        end,
+        settings = {
+          basedpyright = {
+            -- Ruff handles import sorting.
+            disableOrganizeImports = true,
+            analysis = { typeCheckingMode = "standard" },
+          },
+        },
+      })
+
+      -- Leave hover to basedpyright.
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.name == "ruff" then
+            client.server_capabilities.hoverProvider = false
+          end
+        end,
       })
 
       vim.lsp.config("lua_ls", {

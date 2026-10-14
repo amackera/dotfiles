@@ -23,6 +23,12 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- No remote plugins use these providers; skip loading them.
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 require("config.options")
 require("config.keymaps")
 
@@ -33,4 +39,5 @@ require("lazy").setup({
   install = { colorscheme = { "tokyonight-moon" } },
   checker = { enabled = true, notify = false },
   change_detection = { notify = false },
+  rocks = { enabled = false },
 })

@@ -22,11 +22,13 @@ return {
       files = {
         -- Never surface build artefacts or deps in a Phoenix/node project.
         rg_opts = "--color=never --files --hidden --follow "
-          .. "-g '!.git' -g '!node_modules' -g '!_build' -g '!deps' -g '!.elixir_ls' -g '!priv/static/assets'",
+          .. "-g '!.git' -g '!node_modules' -g '!_build' -g '!deps' -g '!.elixir_ls' -g '!priv/static/assets'"
+          .. " -g '!.venv' -g '!__pycache__' -g '!.ruff_cache' -g '!.mypy_cache' -g '!.pytest_cache'",
       },
       grep = {
         rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 "
-          .. "-g '!.git' -g '!node_modules' -g '!_build' -g '!deps' -g '!.elixir_ls'",
+          .. "-g '!.git' -g '!node_modules' -g '!_build' -g '!deps' -g '!.elixir_ls'"
+          .. " -g '!.venv' -g '!__pycache__'",
       },
     },
   },

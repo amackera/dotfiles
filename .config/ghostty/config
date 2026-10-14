@@ -3,3 +3,8 @@ font-size = 12
 
 # Option acts as Alt/Meta (for tmux and emacs bindings)
 macos-option-as-alt = true
+
+# Solid block cursor everywhere (stop shell integration from switching it to a bar)
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor

@@ -44,6 +44,10 @@ return {
         graphql = { "prettierd", "prettier", stop_after_first = true },
 
         lua = { "stylua" },
+
+        -- Sort imports, then format. Fixes (e.g. removing unused imports) are
+        -- left to the ruff LSP code actions so saving never deletes code.
+        python = { "ruff_organize_imports", "ruff_format" },
       },
       default_format_opts = { lsp_format = "fallback" },
       format_on_save = function(bufnr)

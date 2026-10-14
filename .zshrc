@@ -21,3 +21,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # asdf version manager
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+alias vim="nvim"
+
+# Homebrew libs (e.g. cairo) for uv-managed Python
+export DYLD_FALLBACK_LIBRARY_PATH="/opt/homebrew/lib:${DYLD_FALLBACK_LIBRARY_PATH}"
